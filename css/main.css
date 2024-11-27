@@ -1,0 +1,28 @@
+/* -------------------  Hauptbereich  -----------------*/
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    padding: 16px var(--padding_calc);
+    margin-top: var(--height-header);  
+
+    background: var(--basic_white);
+}
+
+button{
+    padding: 8px 16px;
+    background: var(--grey);
+    color: var(--basic_white);
+    border: none;    
+    cursor: pointer;
+    width: fit-content;
+    font-weight: bold;
+    border-radius: 10%;
+    box-shadow: 0px -5px 10px 1px rgba(0, 0, 0, 0.6) inset;
+}
+
+button:hover{
+    scale: 1.05;
+}
