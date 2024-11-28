@@ -12,6 +12,8 @@
     --header_color: linear-gradient(145deg, #d32f2f, #b71c1c);
     --gold: rgb(201, 174, 83);
     --grey: rgb(61, 61, 61);
+    --blue: #0044cc;
+    --lightgrey: rgb(110, 110, 110);
 
     /* value */
     --b_rad: 16px;
@@ -42,4 +44,11 @@ body {
 
 .d_none {
     display: none;
+}
+
+h1 {
+    color: #ffc001;
+    font-size: 52px;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #0044cc;
 }

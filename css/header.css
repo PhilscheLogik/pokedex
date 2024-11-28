@@ -3,7 +3,8 @@
 /* https://bennettfeely.com/clippy/ */
 header {
     background: var(--header_color);
-    color: var(--bg_color);
+    color: var(--basic_white);
+    font-size: 24px;
 
     padding: 10px var(--padding_calc);
 
@@ -18,21 +19,31 @@ header {
     justify-content: space-between;
     align-items: center;
     z-index: 1;
-    box-sizing: border-box;    
-    /* clip-path: polygon(0 0, 20% 0, 50% 50%, 100% 0, 100% 100%, 0 100%);  */
-    /* clip-path: polygon(100% 0, 100% 80%, 70% 80%, 40% 100%, 0 100%, 0 0); */
-    /* clip-path: path("M 0 0 H 100 V 80 Q 70 80 40 100 T 0 100 Z"); */
+    box-sizing: border-box;
+
+    /* https://yqnn.github.io/svg-path-editor/ */
+    /* clip-path: path("M 0 40 L 0 0 L 110 0 L 110 20 L 75 20 C 35 20 60 40 25 40 T 0 40"); */
+    /* clip-path: path("m 0 40 l 0 -40 l 110 0 l 0 20 l -35 0 c -40 0 -15 20 -50 20 t -25 0"); */
+
     box-shadow: 0px -5px 10px 1px rgba(0, 0, 0, 0.6) inset, 0px 10px 5px 1px rgba(255, 255, 255, 0.4) inset;
+    width: 100%;
 }
 
-header>img {
+header img {
     width: 80px;
 }
 
-header>img:hover {
-    cursor: pointer;
+header img:hover {
+    /* cursor: pointer; */
     scale: 1.05;
 }
+
+.header-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* -------------------  Navbar  -----------------*/
 nav>img {
@@ -43,3 +54,4 @@ nav>img {
 nav>img:hover {
     filter: drop-shadow(0px 0px 2px var(--bg_color));
 }
+

@@ -7,30 +7,37 @@
 /** DE
  * Initialisiert verschiedene Funktionen: ...
  */
-const init = () => {
-  // getLocalStorage();
-  fetchDataGOTJson();
+const init = async () => {  
+  await loadingPokeData();  
 };
+
+const loadingPokeData = async () => {
+  const promises = [];
+  for (let i = start; i < end; i++) {
+    promises.push(fetchDataPokeJson(i + 1)); //new vorher stand fetchDataPokeJson
+  }
+  await Promise.all(promises); //new
+  
+  createCards(); 
+  // console.log(dataPokemon[0])
+  // console.log(dataPokemon[0].sprites.other["official-artwork"].front_default)
+  
+}
+
 
 const createCards = () => {
   let contentRef = document.getElementById("content-profiles");
   let codePart = start === 0 ? "" : contentRef.innerHTML;
 
   for (let i = start; i < end; i++) {
-    codePart += renderProfile(dataArray[i]);
+    codePart += renderProfile(dataPokemon[i]);
   }
-  contentRef.innerHTML = codePart;
-  setCheckStartEnd();
+  contentRef.innerHTML = codePart;  
 };
 
-const setCheckStartEnd = () => {
-  console.log("--------------");
-  console.log(start, end);
+const setCheckStartEnd = () => { 
   start = end;
-  end = end + 5 > dataArray.length ? dataArray.length : end + 5;
-
-  console.log(dataArray);
-
+  end = end + 5 > dataPokemon.length ? dataPokemon.length : end + 5;
   if (start == end) {
     buttonDisabled();
   }  
