@@ -1,0 +1,70 @@
+/* -------------------  cards  -----------------*/
+
+.card-container {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--grey);
+    border-radius: 5%;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 5px solid var(--grey);
+}
+
+.card-container:hover {
+    scale: 1.05;
+}
+
+.card-container img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-container span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 8px;
+    box-sizing: border-box;
+    border-radius: 10px 10px 0 0;
+
+    background-color: var(--lightgrey);
+    color: var(--basic_white);
+
+    box-shadow: 0px -5px 10px 1px rgba(0, 0, 0, 0.6) inset, 0px 10px 5px 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+.img-type-color {
+    background-color: green;
+    width: 100%;
+
+}
+
+.card-types {
+    display: flex;
+    justify-content: center;
+    background-color: var(--lightgrey);
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+}
+
+.card-types img {
+    width: 30px;
+    background: none;
+    padding: 8px;
+    border-radius: 50%;
+    object-fit: contain;   
+
+    /* box-shadow: 0px 0px 5px 2px white inset; */
+}

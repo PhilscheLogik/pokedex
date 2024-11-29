@@ -1,46 +1,51 @@
 "use strict";
 
 /** Allgemeine Info
- *  
+ *
  */
 // ----------------------------------------- Anfang ------------------------------------------------------
 /** DE
  * Initialisiert verschiedene Funktionen: ...
  */
-const init = async () => {  
-  await loadingPokeData();  
+const init = async () => {
+  await loadingPokeData();
 };
+
+// const loadingPokeData = () => {
+//   for (let i = start; i < end; i++) {
+//     fetchDataPokeJson(i + 1);
+//   }
+//   console.log(dataPokemon);
+//   console.log(dataPokemon[0])
+// };
 
 const loadingPokeData = async () => {
   const promises = [];
   for (let i = start; i < end; i++) {
-    promises.push(fetchDataPokeJson(i + 1)); //new vorher stand fetchDataPokeJson
+    promises.push(await fetchDataPokeJson(i + 1));
   }
-  await Promise.all(promises); //new
-  
-  createCards(); 
-  // console.log(dataPokemon[0])
-  // console.log(dataPokemon[0].sprites.other["official-artwork"].front_default)
-  
-}
+  await Promise.all(promises);
 
+  createCards();
+  setCheckStartEnd();
+};
 
 const createCards = () => {
   let contentRef = document.getElementById("content-profiles");
   let codePart = start === 0 ? "" : contentRef.innerHTML;
 
   for (let i = start; i < end; i++) {
-    codePart += renderProfile(dataPokemon[i]);
+    codePart += renderCard(dataPokemon[i]);
   }
-  contentRef.innerHTML = codePart;  
+  contentRef.innerHTML = codePart;
 };
 
-const setCheckStartEnd = () => { 
+const setCheckStartEnd = () => {
   start = end;
-  end = end + 5 > dataPokemon.length ? dataPokemon.length : end + 5;
+  end = end + stepNumber > maxNumber ? maxNumber : end + stepNumber;
   if (start == end) {
     buttonDisabled();
-  }  
+  }
 };
 
 const buttonDisabled = () => {
@@ -48,24 +53,18 @@ const buttonDisabled = () => {
   btnRef.classList.add("d_none");
 };
 
+const createTypSection = (types) =>
+  types.map((e) => renderTypSection(e)).join(" ");
 
-
-
-
-
-
-
-
-
-// -------------- Zeug --------------------
-/** DE
- * Entfernt das Overlay-Element.
- * @param {String} id 
- */
-const closeOverlay = (id) => {
-  const overlay = document.getElementById(id); // Hole das übergeordnete Element
-  const parent = overlay.parentNode;
-  parent.removeChild(overlay); // Entferne das Div vom übergeordneten Element
+const getBGType = (types) => {
+  let color1 = typeColors[types[0].type.name]
+    ? typeColors[types[0].type.name]
+    : "white";
+  let color2 = "white";
+  if (types.length >= 2) {
+    color2 = typeColors[types[1].type.name];
+  }
+  return renderLinearGradient(color1, color2);
 };
 
 // ----------------------------------------- Sonstige ------------------------------------------------------
@@ -79,3 +78,25 @@ const toggleClass = (id, classname) => {
   idRef.classList.toggle(classname);
 };
 
+const enableOverlay = (index) => {
+  let bodyRef = document.getElementById("body-container");
+  bodyRef.innerHTML += renderOverlay(index);
+  bodyRef.classList.add("overflowHidden");
+};
+
+/** DE
+ * Entfernt das Overlay-Element.
+ * @param {String} id
+ */
+const closeOverlay = (id) => {
+  const overlay = document.getElementById(id);
+  const parent = overlay.parentNode;
+  parent.removeChild(overlay);
+
+  let bodyRef = document.getElementById("body-container");
+  bodyRef.classList.remove("overflowHidden");
+};
+
+const eventStop = (event) => {
+  event.stopPropagation();
+};

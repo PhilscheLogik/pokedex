@@ -46,9 +46,14 @@ body {
     display: none;
 }
 
+/* https://www.cdnfonts.com/pokemon-solid.font */
+
 h1 {
     color: #ffc001;
     font-size: 52px;
-    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #0044cc;
+
+    font-family: 'Pokemon Solid', sans-serif;
 }
+
