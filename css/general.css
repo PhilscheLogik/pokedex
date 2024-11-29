@@ -11,9 +11,9 @@
     --basic_white: whitesmoke;
     --header_color: linear-gradient(145deg, #d32f2f, #b71c1c);
     --gold: rgb(201, 174, 83);
-    --grey: rgb(61, 61, 61);
+    --grey: #181818;
     --blue: #0044cc;
-    --lightgrey: rgb(110, 110, 110);
+    --lightgrey: #282727;
 
     /* value */
     --b_rad: 16px;
@@ -56,4 +56,5 @@ h1 {
 
     font-family: 'Pokemon Solid', sans-serif;
 }
+
 

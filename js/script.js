@@ -2,7 +2,14 @@
 
 /** Allgemeine Info
  *
+ * 4 Spinner Loading
+ * 3 Filter function
+ * 1 Navbar
+ * 5 Responsiv
+ * 2 Overlay Bilder links rechts
+ *
  */
+
 // ----------------------------------------- Anfang ------------------------------------------------------
 /** DE
  * Initialisiert verschiedene Funktionen: ...
@@ -19,13 +26,21 @@ const init = async () => {
 //   console.log(dataPokemon[0])
 // };
 
-const loadingPokeData = async () => {
-  const promises = [];
-  for (let i = start; i < end; i++) {
-    promises.push(await fetchDataPokeJson(i + 1));
-  }
-  await Promise.all(promises);
+// const loadingPokeData = async () => {
+//   const promises = [];
+//   for (let i = start; i < end; i++) {
+//     promises.push(await fetchDataPokeJson(i + 1));
+//   }
+//   await Promise.all(promises);
 
+//   createCards();
+//   setCheckStartEnd();
+// };
+
+const loadingPokeData = async () => {
+  for (let i = start; i < end; i++) {
+    await fetchDataPokeJson(i + 1);
+  }
   createCards();
   setCheckStartEnd();
 };
@@ -55,6 +70,9 @@ const buttonDisabled = () => {
 
 const createTypSection = (types) =>
   types.map((e) => renderTypSection(e)).join(" ");
+
+const createTypInfoSection = (types) =>
+  types.map((e) => renderTypInfoSection(e)).join(" ");
 
 const getBGType = (types) => {
   let color1 = typeColors[types[0].type.name]
@@ -100,3 +118,27 @@ const closeOverlay = (id) => {
 const eventStop = (event) => {
   event.stopPropagation();
 };
+
+// ----------------------------------------- navbar ------------------------------------------------------
+
+
+const createMeasures = (index) => {
+  let contRef = document.getElementById("card-info-content");
+  contRef.innerHTML = renderMeasures(index);
+};
+
+
+const createAbilities = (index) => {
+  let abiNames = [];
+  for (let i = 0; i < dataPokemon[index].abilities.length; i++) {
+    abiNames.push(dataPokemon[index].abilities[i].ability.name)    
+  }
+  
+  return abiNames.join(', ')
+}
+
+const changeListItems = (id) => {
+  toggleClass(id, 'selected-nav');
+
+  // hier muss noch die anderen Button/li geprüft bzw. werden.
+}
