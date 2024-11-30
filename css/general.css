@@ -53,6 +53,7 @@ h1 {
     font-size: 52px;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #0044cc;
+    text-align: center;
 
     font-family: 'Pokemon Solid', sans-serif;
 }

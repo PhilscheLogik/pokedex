@@ -16,6 +16,8 @@ let currentIndex = 0;
 let start = 0;
 let end = 20;
 
+let selectedIndex = 0;
+
 const typeColors = {
   fire: "orange",
   water: "blue",

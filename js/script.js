@@ -121,24 +121,24 @@ const eventStop = (event) => {
 
 // ----------------------------------------- navbar ------------------------------------------------------
 
+const selectNavItem = (id) => {
+  toggleClass("item" + selectedIndex, "selected");
+  toggleClass("item" + id, "selected");
+  selectedIndex = id;
+};
 
 const createMeasures = (index) => {
   let contRef = document.getElementById("card-info-content");
   contRef.innerHTML = renderMeasures(index);
 };
 
-
 const createAbilities = (index) => {
   let abiNames = [];
   for (let i = 0; i < dataPokemon[index].abilities.length; i++) {
-    abiNames.push(dataPokemon[index].abilities[i].ability.name)    
+    abiNames.push(dataPokemon[index].abilities[i].ability.name);
   }
-  
-  return abiNames.join(', ')
-}
 
-const changeListItems = (id) => {
-  toggleClass(id, 'selected-nav');
+  return abiNames.join(", ");
+};
 
-  // hier muss noch die anderen Button/li geprüft bzw. werden.
-}
+

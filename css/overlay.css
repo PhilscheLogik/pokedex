@@ -6,6 +6,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px); /* Weicher Glaseffekt */
     z-index: 2;
 
     display: flex;
@@ -30,7 +31,7 @@
     align-items: center;
 
     background-color: var(--basic_white);
-    border-radius: 5%;
+    border-radius: 8px;
     box-sizing: border-box;
 
     border: 2px solid black;
@@ -89,6 +90,8 @@
     justify-content: flex-start;
     align-items: flex-start;
 
+    flex: 1;
+
     position: absolute;
     top: 10%;
     left: 0;
@@ -97,7 +100,7 @@
 /*-----------------------------------------------*/
 .card-info-img-type-color {
     width: 100%;
-    border-radius: 5% 5% 0 0;
+    border-radius: 5px 5px 0 0;
 
     display: flex;
     flex-direction: row;
@@ -114,56 +117,67 @@
 
 .card-info-nav {
     width: 100%;
-    background: var(--basic_white);
+    margin: auto;
+
+    background: var(--lightgrey);
     border-radius: 32px 32px 20px 20px;
     padding-top: 32px;
     box-sizing: border-box;
-
-    border: 1px solid red;
+    box-shadow: 0px -2px 5px 1px var(--basic_white) inset ;
 }
 
 .card-info-nav ul {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    list-style: none;
-    margin: 0;
-    padding: 8px;
-}
-
-.card-info-nav ul {
-    display: flex;
-    flex-direction: row;
     justify-content: space-around;
     list-style: none;
-    cursor: pointer;
+    margin: 0;
+    padding: 8px 8px 0;
 }
 
 .card-info-nav li {
-    padding: 8px 8px;
-    background: var(--basic_white);
-    color: var(--grey);
-    border: none;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin: 0 3px;
+
+    background: var(--lightgrey);
+    color: var(--basic_white);
+
+    font-size: 0.8rem;
+
     cursor: pointer;
-    border-radius: 10%;
-    border: 1px solid var(--grey);
+    border-radius: 10px 10px 0 0;
+    border-color: var(--lightgrey);
+    border-width: 1px;
 }
 
-.card-info-nav li:hover {    
-    background: var(--grey);
-    color: var(--basic_white);
+.card-info-nav li:hover {
+    background: var(--basic_white);
+    color: var(--lightgrey);       
 }
 
-.card-info-nav .selected-nav {    
-    background: blue;
-    color: var(--basic_white);
+
+.card-info-nav .selected {
+    background: var(--basic_white);
+    color: var(--lightgrey);
+    font-weight: bold;
+    font-size: 1rem;
+    /* box-shadow: 0px -2px 5px 1px var(--basic_white); */
+
 }
+
+/*-- card content --*/
 
 #card-info-content {
     width: 100%;
     height: 30vh;
     margin: 0;
     box-sizing: border-box;
+    border-radius:0 0 5px 5px;
+
+    background: var(--basic_white);
 
     display: flex;
     flex-direction: column;
@@ -171,13 +185,18 @@
     align-items: center;
 }
 
+/* ------------ Info Tabelle für About -----------*/
 #card-info-content table {
     width: 100%;
     margin-left: 16px;
 }
 
-#card-info-content td:first-child {
+#card-info-content tr:first-child {
     width: 65px;
+}
+
+#card-info-content tr:last-child {
+    width: 220px;
 }
 
 #card-info-content td {

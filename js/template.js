@@ -51,15 +51,13 @@ const renderOverlay = (index) => `
     </div>
     <section class="card-info-nav" >          
       <nav>
-        <ul onload="createMeasures(${index})">
-          <li class="selected-nav" onclick="createMeasures(${index}), changeListItems('measuresPoke')" id="measuresPoke">Measures</li>
-          <li onclick="createMeasures(${index}), changeListItems('test1')" id="test1">TESTNAV</li>
-          <li onclick="" id="test2">TESTNAV</li>
+        <ul id="nav-list">
+          <li class="selected" onclick="createMeasures(${index}), selectNavItem(0)" id="item0">About</li>
+          <li onclick="createMeasures(${index}), selectNavItem(1)" id="item1">Stats</li>
+          <li onclick="createMeasures(${index}), selectNavItem(2)" id="item2">Evolution</li>
         </ul>
       </nav>
-      <div id="card-info-content"> 
-      INHALT
-      </div>
+      <div id="card-info-content">${renderMeasures(index)}</div>
     </section>        
   </section>
 </div>
