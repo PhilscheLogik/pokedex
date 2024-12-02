@@ -27,7 +27,7 @@
     />
   </head>
   <!-- onload="init()" -->
-  <body id="body-container" onload="init()" >
+  <body id="body-container" onload="init()">
     <!-- header -->
     <header>
       <div class="header-left">
@@ -38,11 +38,16 @@
       <input type="text" />
     </header>
     <!-- main -->
-    <main id="main-content">
-      <h1>Komm und schnapp sie dir!</h1>      
-      <div id="content-profiles"></div>
-      <button id="more-profiles" onclick="init()">Mehr laden</button>
-    </main>   
+    <main id="main-content">      
+      <h1>Komm und schnapp sie dir!</h1>
+      <div id="gallery-profiles">
+        <div id="content-profiles"></div>
+        <button id="more-profiles" onclick="init()">Mehr laden</button>
+        <div id="loading-spinner-container" class="loading-spinner d_none">
+          <img src="./asset/img/icon/pokemon-loading.png" alt="loading" />
+        </div>
+      </div>
+    </main>
 
     <!-- footbar -->
     <footer>

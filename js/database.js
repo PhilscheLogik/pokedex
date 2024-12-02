@@ -5,16 +5,17 @@
 // https://pokeapi.co/api/v2/pokemon?offset=0&limit=50
 // https://pokeapi.co/api/v2/pokemon/1/
 // https://pokeapi.co/api/v2/evolution-chain/1/
+//1025 max 
 
-let maxNumber = 1000; 
-let stepNumber = 20;
+let maxNumber = 1050; 
+let stepNumber = 300;
+let start = 0;
+let end = 750;
 
 let dataPokemon = [];
+let dataPartPokemon = [];
 
 let currentIndex = 0;
-
-let start = 0;
-let end = 10;
 
 let selectedIndex = 0;
 

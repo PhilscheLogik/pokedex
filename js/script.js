@@ -2,7 +2,7 @@
 
 /** Allgemeine Info
  *
- * 3 Spinner Loading
+ * check 3 -> 3 Spinner Loading
  * 4 Filter function
  * check 1 -> 1 Navbar
  * 5 Responsiv
@@ -16,15 +16,19 @@
  * Initialisiert verschiedene Funktionen: ...
  */
 const init = async () => {
+  toggleClass('more-profiles', 'd_none');
+  toggleClass('loading-spinner-container', 'd_none');
   await loadingPokeData();
+  toggleClass('loading-spinner-container', 'd_none');
+  toggleClass('more-profiles', 'd_none');  
+  createCards();
+  setCheckStartEnd();
 };
 
 const loadingPokeData = async () => {
   for (let i = start; i < end; i++) {
     await fetchDataPokeJson(i + 1);
-  }
-  createCards();
-  setCheckStartEnd();
+  }  
 };
 
 const createCards = () => {
