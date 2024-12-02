@@ -2,12 +2,13 @@
 
 /** Allgemeine Info
  *
- * 4 Spinner Loading
- * 3 Filter function
- * 1 Navbar
+ * 3 Spinner Loading
+ * 4 Filter function
+ * check 1 -> 1 Navbar
  * 5 Responsiv
- * 2 Overlay Bilder links rechts
- *
+ * check 2 -> 2 Overlay Bilder links rechts
+ * 6 mehr navbar content wie Evo Level
+ * 7 sound vom pokemon
  */
 
 // ----------------------------------------- Anfang ------------------------------------------------------
@@ -17,25 +18,6 @@
 const init = async () => {
   await loadingPokeData();
 };
-
-// const loadingPokeData = () => {
-//   for (let i = start; i < end; i++) {
-//     fetchDataPokeJson(i + 1);
-//   }
-//   console.log(dataPokemon);
-//   console.log(dataPokemon[0])
-// };
-
-// const loadingPokeData = async () => {
-//   const promises = [];
-//   for (let i = start; i < end; i++) {
-//     promises.push(await fetchDataPokeJson(i + 1));
-//   }
-//   await Promise.all(promises);
-
-//   createCards();
-//   setCheckStartEnd();
-// };
 
 const loadingPokeData = async () => {
   for (let i = start; i < end; i++) {
@@ -141,4 +123,18 @@ const createAbilities = (index) => {
   return abiNames.join(", ");
 };
 
+const nextCard = (index, direction) => {
+  let cardInfoRef = document.getElementById("overlay");
+  let futureIndex = direction == "right" ? ++index : --index;
 
+  if (futureIndex >= start) {
+    futureIndex = 0;
+  }
+
+  if (futureIndex < 0) {
+    futureIndex = start - 1;
+  } 
+
+  cardInfoRef.innerHTML = "";
+  cardInfoRef.innerHTML = renderCardInfo(futureIndex);
+};

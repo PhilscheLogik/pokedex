@@ -31,7 +31,14 @@ const renderTypInfoSection = (type) => `
 
 const renderOverlay = (index) => `
 <div id="overlay" onclick="closeOverlay('overlay')">
+  ${renderCardInfo(index)}  
+</div>
+`;
+
+const renderCardInfo = (index) => `
   <section onclick="eventStop(event)" class="card-info-container">
+    <div onclick="nextCard(${index}, 'left')" class="arrow left-arrow"><</div>
+    <div onclick="nextCard(${index}, 'right')" class="arrow right-arrow">></div>
     <div class="card-info-header">
       <span>#${dataPokemon[index].id}</span>
       <h3>${
@@ -53,18 +60,24 @@ const renderOverlay = (index) => `
       <nav>
         <ul id="nav-list">
           <li class="selected" onclick="createMeasures(${index}), selectNavItem(0)" id="item0">About</li>
-          <li onclick="createMeasures(${index}), selectNavItem(1)" id="item1">Stats</li>
-          <li onclick="createMeasures(${index}), selectNavItem(2)" id="item2">Evolution</li>
+          <li onclick="createTest(1), selectNavItem(1)" id="item1">Stats</li>
+          <li onclick="createTest(2), selectNavItem(2)" id="item2">Evolution</li>
         </ul>
       </nav>
       <div id="card-info-content">${renderMeasures(index)}</div>
     </section>        
   </section>
-</div>
 `;
 
 const renderLinearGradient = (color1, color2) =>
   `linear-gradient(120deg, ${color1}, ${color2})`;
+
+const renderTest = (index) => `<p>TEST ${index}<p>`;
+
+const createTest = (index) => {
+  let contRef = document.getElementById("card-info-content");
+  contRef.innerHTML = renderTest(index);
+};
 
 const renderMeasures = (index) => `
 <table>
@@ -86,7 +99,7 @@ const renderMeasures = (index) => `
   <tr>
     <td>Weight</td>
     <td>:</td>
-    <td>${(dataPokemon[index].weight / 10).toFixed(2).replace(".", ",") } kg</td>
+    <td>${(dataPokemon[index].weight / 10).toFixed(2).replace(".", ",")} kg</td>
   </tr>
 </table>
 `;

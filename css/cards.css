@@ -1,21 +1,23 @@
 /* -------------------  cards  -----------------*/
 
 .card-container {
-    width: 250px;
+    width: 175px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     background-color: var(--grey);
-    border-radius: 5%;
-    cursor: pointer;
+    border-radius: 8px;
+    
     box-sizing: border-box;
-    border: 5px solid var(--grey);
+    border: 3px solid var(--grey);
 }
 
 .card-container:hover {
+    cursor: pointer;
     scale: 1.05;
+    filter: drop-shadow(0px 0px 5px var(--grey));    
 }
 
 .card-container img {
@@ -58,7 +60,7 @@
 }
 
 .card-types img {
-    width: 30px;
+    width: 25px;
     background: none;
     padding: 8px;
     border-radius: 50%;
