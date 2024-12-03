@@ -7,12 +7,12 @@
 // https://pokeapi.co/api/v2/evolution-chain/1/
 //1025 max 
 
-let maxNumber = 1050; 
-let stepNumber = 300;
+let maxNumber = 1025; 
+let stepNumber = 1000;
 let start = 0;
-let end = 750;
+let end = 20;
 
-let dataPokemon = [];
+let dataAllPokemon = [];
 let dataPartPokemon = [];
 
 let currentIndex = 0;
@@ -44,10 +44,10 @@ const fetchDataPokeJson = async (index) => {
   try {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${index}/`);
     let responseJson = await response.json();
-    dataPokemon.push(responseJson);
+    dataAllPokemon.push(responseJson);
   } catch (error) {
     console.log(error);
     //  document.getElementById("main-content").innerHTML = renderError(error);
-    dataPokemon.push({ msg: error });
+    dataAllPokemon.push({ msg: error });
   }
 };

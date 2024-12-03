@@ -2,13 +2,24 @@
 
 /** Allgemeine Info
  *
- * check 3 -> 3 Spinner Loading
- * 4 Filter function
  * check 1 -> 1 Navbar
- * 5 Responsiv
  * check 2 -> 2 Overlay Bilder links rechts
- * 6 mehr navbar content wie Evo Level
- * 7 sound vom pokemon
+ * check 3 -> 3 Spinner Loading
+ * check 4 -> 4 Filter function
+ * check 5 -> 5 Responsiv must have status
+ * 6a card info mit Mausrad und Pfeiltasten vor und zurück gehen
+ * 6b cards Layout abändern -> https://codepen.io/mikemang/pen/GRrBRZM https://codepen.io/MEDALI1977/pen/VwaREaV
+ * 7 card info Layout abändern -> https://codepen.io/genarocolusso/pen/PoGzXwa
+ * 8 neue Dateneinlesung mit dem https://pokeapi.co/api/v2/pokemon?offset=0&limit=50 results
+ * 9 Stats in der navbar
+ * 10 sound vom pokemon in der navbar
+ * 11 Evo in der navbar
+ */
+
+/** Optional
+ * ID bei kleinen Pokemon Karte
+ * Pokemon erscheint größer etc. (optional) beim Hover von kleinen Pokemon Karte
+ * Footer hinzugefügt
  */
 
 // ----------------------------------------- Anfang ------------------------------------------------------
@@ -16,27 +27,29 @@
  * Initialisiert verschiedene Funktionen: ...
  */
 const init = async () => {
-  toggleClass('more-profiles', 'd_none');
-  toggleClass('loading-spinner-container', 'd_none');
+  toggleClass("more-profiles", "d_none");
+  toggleClass("loading-spinner-container", "d_none");
   await loadingPokeData();
-  toggleClass('loading-spinner-container', 'd_none');
-  toggleClass('more-profiles', 'd_none');  
-  createCards();
+  createCards(dataAllPokemon);
+  toggleClass("loading-spinner-container", "d_none");
+  toggleClass("more-profiles", "d_none");
   setCheckStartEnd();
 };
 
 const loadingPokeData = async () => {
   for (let i = start; i < end; i++) {
     await fetchDataPokeJson(i + 1);
-  }  
+  }
 };
 
-const createCards = () => {
+const createCards = (dataArray) => {
   let contentRef = document.getElementById("content-profiles");
-  let codePart = start === 0 ? "" : contentRef.innerHTML;
+  let codePart = "";
 
-  for (let i = start; i < end; i++) {
-    codePart += renderCard(dataPokemon[i]);
+  let endValue = dataArray.length < end ? dataArray.length : end;
+
+  for (let i = 0; i < endValue; i++) {
+    codePart += renderCard(dataArray[i]);
   }
   contentRef.innerHTML = codePart;
 };
@@ -45,13 +58,8 @@ const setCheckStartEnd = () => {
   start = end;
   end = end + stepNumber > maxNumber ? maxNumber : end + stepNumber;
   if (start == end) {
-    buttonDisabled();
+    toggleClass("more-profiles","d_none")
   }
-};
-
-const buttonDisabled = () => {
-  let btnRef = document.getElementById("more-profiles");
-  btnRef.classList.add("d_none");
 };
 
 const createTypSection = (types) =>
@@ -120,8 +128,8 @@ const createMeasures = (index) => {
 
 const createAbilities = (index) => {
   let abiNames = [];
-  for (let i = 0; i < dataPokemon[index].abilities.length; i++) {
-    abiNames.push(dataPokemon[index].abilities[i].ability.name);
+  for (let i = 0; i < dataAllPokemon[index].abilities.length; i++) {
+    abiNames.push(dataAllPokemon[index].abilities[i].ability.name);
   }
 
   return abiNames.join(", ");
@@ -137,8 +145,25 @@ const nextCard = (index, direction) => {
 
   if (futureIndex < 0) {
     futureIndex = start - 1;
-  } 
+  }
 
   cardInfoRef.innerHTML = "";
   cardInfoRef.innerHTML = renderCardInfo(futureIndex);
+};
+
+const filterPokemon = () => {
+  let textRef = document.getElementById("searchbar");
+  if (textRef.value.length > 2) {
+    dataPartPokemon = dataAllPokemon.filter((p) =>
+      p.name.includes(textRef.value.toLowerCase())
+    );
+    if (dataPartPokemon.length == 0) {
+      let contentRef = document.getElementById("content-profiles");
+      contentRef.innerHTML = renderNotFound();
+    } else {
+      createCards(dataPartPokemon);
+    }
+  } else {
+    createCards(dataAllPokemon);
+  }
 };

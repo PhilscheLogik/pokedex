@@ -1,9 +1,4 @@
-@media(min-width: 1400px) {
-    
-}
-
-
-@media(max-width: 400px) {
+@media(max-width: 480px) {
     header {
         flex-direction: column;
         height: 175px;

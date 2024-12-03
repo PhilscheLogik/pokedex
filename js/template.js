@@ -40,20 +40,20 @@ const renderCardInfo = (index) => `
     <div onclick="nextCard(${index}, 'left')" class="arrow left-arrow"><</div>
     <div onclick="nextCard(${index}, 'right')" class="arrow right-arrow">></div>
     <div class="card-info-header">
-      <span>#${dataPokemon[index].id}</span>
+      <span>#${dataAllPokemon[index].id}</span>
       <h3>${
-        dataPokemon[index].name.charAt(0).toUpperCase() +
-        dataPokemon[index].name.slice(1)
+        dataAllPokemon[index].name.charAt(0).toUpperCase() +
+        dataAllPokemon[index].name.slice(1)
       }</h3>        
     </div>
     <div class="card-info-types">
-      ${createTypInfoSection(dataPokemon[index].types)}          
+      ${createTypInfoSection(dataAllPokemon[index].types)}          
     </div>
     <div class="card-info-img-type-color" style="background: ${getBGType(
-      dataPokemon[index].types
+      dataAllPokemon[index].types
     )};">          
       <img src="${
-        dataPokemon[index].sprites.other["official-artwork"].front_default
+        dataAllPokemon[index].sprites.other["official-artwork"].front_default
       }" alt="#">
     </div>
     <section class="card-info-nav" >          
@@ -89,17 +89,23 @@ const renderMeasures = (index) => `
   <tr>
     <td>Species</td>
     <td>:</td>
-    <td>${dataPokemon[index].species.name}</td>
+    <td>${dataAllPokemon[index].species.name}</td>
   </tr>
   <tr>
     <td>Height</td>
     <td>:</td>
-    <td>${dataPokemon[index].height * 10} cm</td>
+    <td>${dataAllPokemon[index].height * 10} cm</td>
   </tr>
   <tr>
     <td>Weight</td>
     <td>:</td>
-    <td>${(dataPokemon[index].weight / 10).toFixed(2).replace(".", ",")} kg</td>
+    <td>${(dataAllPokemon[index].weight / 10).toFixed(2).replace(".", ",")} kg</td>
   </tr>
 </table>
 `;
+
+const renderNotFound = () =>`
+<h2>Unfortunately nothing could be found :( <br>
+Please enter something else.<h2>
+
+`
