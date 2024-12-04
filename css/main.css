@@ -28,11 +28,10 @@ button:hover {
     scale: 1.05;
 }
 
-
 #content-profiles {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 32px 16px;
     justify-content: center;
     align-content: center;
     margin-bottom: 32px;
@@ -58,7 +57,7 @@ button:hover {
 
     object-fit: cover;
     /* animation: spin 1s linear infinite; */
-    animation: spin 1s ease-in infinite normal none;
+    animation: spin 1s linear infinite normal none;
 }
 
 @keyframes spin {

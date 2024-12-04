@@ -4,18 +4,20 @@
  */
 // ----------------------------------------- Warenkorb ------------------------------------------------------
 
-const renderCard = (data) => `
-<section onclick="enableOverlay(${data.id - 1})" class="card-container">
-  <div class="card-header">
-    <span>#${data.id}</span>
-    <h3>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</h3>        
-  </div>
-  <div style="background: ${getBGType(data.types)};">
-    <img src="${data.sprites.other["official-artwork"].front_default}" alt="#">
-  </div>
-  <div class="card-types">
-    ${createTypSection(data.types)}
-  </div>
+const renderCard= (data) => `
+<section onclick="enableOverlay(${data.id - 1})" class="card" style="background: ${getBGType(data.types, 90)};">
+  <section class="content">
+    <section class="top">
+      <p>#${data.id}</p>
+      <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>      
+    </section>
+    <section class="middle" style="background: ${getBGType(data.types, 120)};">      
+      <img src="${data.sprites.other["official-artwork"].front_default}" />
+    </section>
+    <section class="bottom">
+      ${createTypSection(data.types)}
+    </section>
+  </section>
 </section>
 `;
 
@@ -49,9 +51,7 @@ const renderCardInfo = (index) => `
     <div class="card-info-types">
       ${createTypInfoSection(dataAllPokemon[index].types)}          
     </div>
-    <div class="card-info-img-type-color" style="background: ${getBGType(
-      dataAllPokemon[index].types
-    )};">          
+    <div class="card-info-img-type-color" style="background: ${getBGType(dataAllPokemon[index].types, 225)};">          
       <img src="${
         dataAllPokemon[index].sprites.other["official-artwork"].front_default
       }" alt="#">
@@ -59,18 +59,19 @@ const renderCardInfo = (index) => `
     <section class="card-info-nav" >          
       <nav>
         <ul id="nav-list">
-          <li class="selected" onclick="createMeasures(${index}), selectNavItem(0)" id="item0">About</li>
-          <li onclick="createTest(1), selectNavItem(1)" id="item1">Stats</li>
-          <li onclick="createTest(2), selectNavItem(2)" id="item2">Evolution</li>
+          <li onload="selectLoad(0)" onclick="createTest(0), selectNavItem(0)" id="item0">About</li>
+          <li onload="selectLoad(1)" onclick="createScore(${index}), selectNavItem(1)" id="item1">Scores</li>
+          <li onload="selectLoad(2)" onclick="createTest(2), selectNavItem(2)" id="item2">Stats</li>
+          <li onload="selectLoad(3)" onclick="createTest(3), selectNavItem(3)" id="item3">Evolution</li>
         </ul>
       </nav>
-      <div id="card-info-content">${renderMeasures(index)}</div>
+      <div id="card-info-content">${renderScore(index)}</div>
     </section>        
   </section>
 `;
 
-const renderLinearGradient = (color1, color2) =>
-  `linear-gradient(120deg, ${color1}, ${color2})`;
+const renderLinearGradient = (degree, color1, color2) =>
+  `linear-gradient(${degree}deg, ${color1}, ${color2})`;
 
 const renderTest = (index) => `<p>TEST ${index}<p>`;
 
@@ -79,7 +80,7 @@ const createTest = (index) => {
   contRef.innerHTML = renderTest(index);
 };
 
-const renderMeasures = (index) => `
+const renderScore = (index) => `
 <table>
   <tr>
     <td>Abilities</td>

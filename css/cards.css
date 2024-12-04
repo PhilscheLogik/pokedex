@@ -1,70 +1,86 @@
 /* -------------------  cards  -----------------*/
 
-.card-container {
-    width: 175px;
+.card {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    background-color: var(--grey);
+    height: 250px;
+    width: 200px;
+    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
-    
-    box-sizing: border-box;
-    border: 3px solid var(--grey);
 }
 
-.card-container:hover {
+.card:hover {
     cursor: pointer;
-    scale: 1.05;
-    filter: drop-shadow(0px 0px 5px var(--grey));    
+    transform: perspective(1000px) rotateY(0deg);
+    
+    filter: drop-shadow(0px 0px 5px var(--grey));
 }
 
-.card-container img {
-    width: 100%;
+
+.card {
     object-fit: cover;
+
+    -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, #0004);
+
+    transform-origin: center;
+    transform: perspective(1000px) rotateY(-25deg);
+    transition: 0.2s;
 }
 
-.card-container span {
+
+.content {
     display: flex;
     flex-direction: column;
+    height: 88%;
+    width: 88%;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.content>.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+    background-color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4) inset;
+
+    p {
+        font-weight: bold;
+        font-size: 16px;
+    }
+}
+
+.content>.middle {
+    display: flex;
     justify-content: center;
     align-items: center;
+    height: 70%;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    img {
+        width: 100%;
+    }
 }
 
-.card-header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 8px;
-    box-sizing: border-box;
-    border-radius: 10px 10px 0 0;
-
-    background-color: var(--lightgrey);
-    color: var(--basic_white);
-
-    box-shadow: 0px -5px 10px 1px rgba(0, 0, 0, 0.6) inset, 0px 10px 5px 1px rgba(255, 255, 255, 0.4) inset;
-}
-
-.img-type-color {    
-    width: 100%;
-}
-
-.card-types {
+.content>.bottom {
     display: flex;
     justify-content: center;
-    background-color: var(--lightgrey);
-    border-radius: 0 0 10px 10px;
-    width: 100%;
-}
+    align-items: center;
+    height: 10%;
+    padding-left: 30px;
+    padding-right: 30px;
 
-.card-types img {
-    width: 25px;
-    background: none;
-    padding: 8px;
-    border-radius: 50%;
-    object-fit: contain;   
+    img {
+        height: 90%;
+        /* width: 100%; */
+        object-fit: cover;
+        margin: 0 8px;
+    }
 
-    /* box-shadow: 0px 0px 5px 2px white inset; */
 }

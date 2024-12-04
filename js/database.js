@@ -16,8 +16,9 @@ let dataAllPokemon = [];
 let dataPartPokemon = [];
 
 let currentIndex = 0;
-
 let selectedIndex = 0;
+
+let searchPhrase = "";
 
 const typeColors = {
   fire: "orange",

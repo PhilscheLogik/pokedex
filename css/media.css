@@ -6,3 +6,10 @@
     }
     
 }
+
+@media(max-width: 420px) {
+    .card-info-container {
+        width: 315px;
+    }
+    
+}

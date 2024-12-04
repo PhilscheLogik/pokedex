@@ -7,12 +7,15 @@
  * check 3 -> 3 Spinner Loading
  * check 4 -> 4 Filter function
  * check 5 -> 5 Responsiv must have status
- * 6a card info mit Mausrad und Pfeiltasten vor und zurück gehen
- * 6b cards Layout abändern -> https://codepen.io/mikemang/pen/GRrBRZM https://codepen.io/MEDALI1977/pen/VwaREaV
- * 7 card info Layout abändern -> https://codepen.io/genarocolusso/pen/PoGzXwa
- * 8 neue Dateneinlesung mit dem https://pokeapi.co/api/v2/pokemon?offset=0&limit=50 results
- * 9 Stats in der navbar
- * 10 sound vom pokemon in der navbar
+ * check 6 -> 6 cards Layout abändern -> https://codepen.io/mikemang/pen/GRrBRZM https://codepen.io/MEDALI1977/pen/VwaREaV
+ * check 7a -> 7a card info Layout abändern -> https://codepen.io/genarocolusso/pen/PoGzXwa
+ * check 7b -> 7b card info mit Mausrad und Pfeiltasten vor und zurück gehen
+ * check 8a -> 8a BUG: nach filter wird Gallery nicht korrekt durchgeführt
+ * 8b BUG: Reiter About wird immer durch die Klasse selected ausgewählt wurde, auch wenn die Gallery weiter geht
+ * 8c beim laden favicon animieren
+ * 9 neue Dateneinlesung mit dem https://pokeapi.co/api/v2/pokemon?offset=0&limit=50 results
+ * 10 Stats in der navbar
+ * 12 sound vom pokemon in der navbar
  * 11 Evo in der navbar
  */
 
@@ -58,7 +61,7 @@ const setCheckStartEnd = () => {
   start = end;
   end = end + stepNumber > maxNumber ? maxNumber : end + stepNumber;
   if (start == end) {
-    toggleClass("more-profiles","d_none")
+    toggleClass("more-profiles", "d_none");
   }
 };
 
@@ -68,7 +71,7 @@ const createTypSection = (types) =>
 const createTypInfoSection = (types) =>
   types.map((e) => renderTypInfoSection(e)).join(" ");
 
-const getBGType = (types) => {
+const getBGType = (types, degree) => {
   let color1 = typeColors[types[0].type.name]
     ? typeColors[types[0].type.name]
     : "white";
@@ -76,7 +79,7 @@ const getBGType = (types) => {
   if (types.length >= 2) {
     color2 = typeColors[types[1].type.name];
   }
-  return renderLinearGradient(color1, color2);
+  return renderLinearGradient(degree, color1, color2);
 };
 
 // ----------------------------------------- Sonstige ------------------------------------------------------
@@ -116,15 +119,26 @@ const eventStop = (event) => {
 // ----------------------------------------- navbar ------------------------------------------------------
 
 const selectNavItem = (id) => {
+  
   toggleClass("item" + selectedIndex, "selected");
   toggleClass("item" + id, "selected");
   selectedIndex = id;
 };
 
-const createMeasures = (index) => {
-  let contRef = document.getElementById("card-info-content");
-  contRef.innerHTML = renderMeasures(index);
+const selectLoad = (id) => {
+  if(selectedIndex == id) {
+    toggleClass("item" + selectedIndex, "selected");
+  }
 };
+
+const createScore = (index) => {
+  let contRef = document.getElementById("card-info-content");
+  contRef.innerHTML = renderScore(index);
+};
+
+const selectInfoContent = (index) => {
+
+}
 
 const createAbilities = (index) => {
   let abiNames = [];
@@ -139,6 +153,8 @@ const nextCard = (index, direction) => {
   let cardInfoRef = document.getElementById("overlay");
   let futureIndex = direction == "right" ? ++index : --index;
 
+  cardInfoRef.innerHTML = "";
+
   if (futureIndex >= start) {
     futureIndex = 0;
   }
@@ -147,15 +163,23 @@ const nextCard = (index, direction) => {
     futureIndex = start - 1;
   }
 
-  cardInfoRef.innerHTML = "";
-  cardInfoRef.innerHTML = renderCardInfo(futureIndex);
+  console.log(searchPhrase);
+  if (searchPhrase.length >= 3) {
+    if (dataAllPokemon[futureIndex].name.toLowerCase().includes(searchPhrase)) {
+      cardInfoRef.innerHTML = renderCardInfo(futureIndex);
+    } else {      
+      nextCard(futureIndex, direction);
+    }
+  } else {
+    cardInfoRef.innerHTML = renderCardInfo(futureIndex);
+  }
 };
 
 const filterPokemon = () => {
-  let textRef = document.getElementById("searchbar");
-  if (textRef.value.length > 2) {
+  searchPhrase = document.getElementById("searchbar").value;
+  if (searchPhrase.length > 2) {
     dataPartPokemon = dataAllPokemon.filter((p) =>
-      p.name.includes(textRef.value.toLowerCase())
+      p.name.includes(searchPhrase.toLowerCase())
     );
     if (dataPartPokemon.length == 0) {
       let contentRef = document.getElementById("content-profiles");
