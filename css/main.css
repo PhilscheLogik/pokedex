@@ -1,5 +1,4 @@
 /* -------------------  Hauptbereich  -----------------*/
-
 main {
     flex: 1;
     display: flex;
@@ -31,7 +30,7 @@ button:hover {
 #content-profiles {
     display: flex;
     flex-wrap: wrap;
-    gap: 32px 16px;
+    gap: 42px 16px;
     justify-content: center;
     align-content: center;
     margin-bottom: 32px;
@@ -42,7 +41,6 @@ button:hover {
     text-align: center;
     margin-bottom: 32px;
 }
-
 
 .loading-spinner {
     width: 100%;
@@ -56,7 +54,6 @@ button:hover {
     height: 40px;
 
     object-fit: cover;
-    /* animation: spin 1s linear infinite; */
     animation: spin 1s linear infinite normal none;
 }
 
@@ -69,12 +66,6 @@ button:hover {
         transform: rotate(360deg);
     }
 }
-
-
-
-
-
-/* animation: myAnim 2s ease 0s 1 normal forwards; */
 
 @keyframes myAnim {
 

@@ -4,14 +4,18 @@
  */
 // ----------------------------------------- Warenkorb ------------------------------------------------------
 
-const renderCard= (data) => `
-<section onclick="enableOverlay(${data.id - 1})" class="card" style="background: ${getBGType(data.types, 90)};">
+const renderCard = (data) => `
+<section onclick="enableOverlay(${data.id - 1})" 
+class="card" style="background: ${getBGType(data.types, 90)};">
   <section class="content">
     <section class="top">
       <p>#${data.id}</p>
       <p>${data.name.charAt(0).toUpperCase() + data.name.slice(1)}</p>      
     </section>
-    <section class="middle" style="background: ${getBGType(data.types, 120)};">      
+    <section class="middle" style="background: ${getBGType(
+      data.types,
+      120
+    )};">      
       <img src="${data.sprites.other["official-artwork"].front_default}" />
     </section>
     <section class="bottom">
@@ -51,7 +55,10 @@ const renderCardInfo = (index) => `
     <div class="card-info-types">
       ${createTypInfoSection(dataAllPokemon[index].types)}          
     </div>
-    <div class="card-info-img-type-color" style="background: ${getBGType(dataAllPokemon[index].types, 225)};">          
+    <div class="card-info-img-type-color" style="background: ${getBGType(
+      dataAllPokemon[index].types,
+      225
+    )};">          
       <img src="${
         dataAllPokemon[index].sprites.other["official-artwork"].front_default
       }" alt="#">
@@ -59,13 +66,25 @@ const renderCardInfo = (index) => `
     <section class="card-info-nav" >          
       <nav>
         <ul id="nav-list">
-          <li onload="selectLoad(0)" onclick="createTest(0), selectNavItem(0)" id="item0">About</li>
-          <li onload="selectLoad(1)" onclick="createScore(${index}), selectNavItem(1)" id="item1">Scores</li>
-          <li onload="selectLoad(2)" onclick="createTest(2), selectNavItem(2)" id="item2">Stats</li>
-          <li onload="selectLoad(3)" onclick="createTest(3), selectNavItem(3)" id="item3">Evolution</li>
+          <li onclick="createTest(0), selectNavItem(0)" 
+           id="item0" class="${
+             selectedIndex === 0 ? "selected" : ""
+           }">About</li>
+          <li onclick="createScore(${index}), selectNavItem(1)"
+           id="item1" class="${
+             selectedIndex === 1 ? "selected" : ""
+           }">Scores</li>
+          <li onclick="createStats(${index}), selectNavItem(2)"
+           id="item2" class="${
+             selectedIndex === 2 ? "selected" : ""
+           }">Stats</li>
+          <li onclick="createTest(0), selectNavItem(3)" 
+           id="item3" class="${
+             selectedIndex === 3 ? "selected" : ""
+           }">Evolution</li>
         </ul>
       </nav>
-      <div id="card-info-content">${renderScore(index)}</div>
+      <div id="card-info-content">${createCardInfoContent(index)}</div>
     </section>        
   </section>
 `;
@@ -79,6 +98,31 @@ const createTest = (index) => {
   let contRef = document.getElementById("card-info-content");
   contRef.innerHTML = renderTest(index);
 };
+
+const createStats = (index) => {
+  let contRef = document.getElementById("card-info-content");
+  contRef.innerHTML = renderAllStats(index)  
+};
+
+const renderAllStats = (index) => {
+  let codePart = "";
+  for (let i = 0; i < dataAllPokemon[index].stats.length; i++) {
+    codePart += renderStat(index, i);
+  }
+  return codePart;
+};
+
+const renderStat = (index, i) => `
+<div class="bar-with-label">
+  <span class="label">${dataAllPokemon[index].stats[i].stat.name} :</span>
+  <div class="dia-bar" style="--dia: ${Math.round((dataAllPokemon[index].stats[i].base_stat / 255) * 100).toFixed(0)}%;">
+    ${dataAllPokemon[index].stats[i].base_stat}
+  </div> 
+</div>
+`;
+
+// ${dataAllPokemon[index].stats[i].base_stat},
+// ${Math.round((dataAllPokemon[index].stats[i].base_stat / 255) * 100).toFixed(0)}
 
 const renderScore = (index) => `
 <table>
@@ -100,13 +144,14 @@ const renderScore = (index) => `
   <tr>
     <td>Weight</td>
     <td>:</td>
-    <td>${(dataAllPokemon[index].weight / 10).toFixed(2).replace(".", ",")} kg</td>
+    <td>${(dataAllPokemon[index].weight / 10)
+      .toFixed(2)
+      .replace(".", ",")} kg</td>
   </tr>
 </table>
 `;
 
-const renderNotFound = () =>`
+const renderNotFound = () => `
 <h2>Unfortunately nothing could be found :( <br>
 Please enter something else.<h2>
-
-`
+`;

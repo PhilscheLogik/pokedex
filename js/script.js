@@ -1,27 +1,25 @@
 "use strict";
 
-/** Allgemeine Info
- *
- * check 1 -> 1 Navbar
- * check 2 -> 2 Overlay Bilder links rechts
- * check 3 -> 3 Spinner Loading
- * check 4 -> 4 Filter function
- * check 5 -> 5 Responsiv must have status
- * check 6 -> 6 cards Layout abändern -> https://codepen.io/mikemang/pen/GRrBRZM https://codepen.io/MEDALI1977/pen/VwaREaV
- * check 7a -> 7a card info Layout abändern -> https://codepen.io/genarocolusso/pen/PoGzXwa
- * check 7b -> 7b card info mit Mausrad und Pfeiltasten vor und zurück gehen
- * check 8a -> 8a BUG: nach filter wird Gallery nicht korrekt durchgeführt
- * 8b BUG: Reiter About wird immer durch die Klasse selected ausgewählt wurde, auch wenn die Gallery weiter geht
- * 8c beim laden favicon animieren
- * 9 neue Dateneinlesung mit dem https://pokeapi.co/api/v2/pokemon?offset=0&limit=50 results
- * 10 Stats in der navbar
- * 12 sound vom pokemon in der navbar
- * 11 Evo in der navbar
+/** Anmerkung
+ * Neigung der kleinen Cards ist bei Google Chrome und Edge leicht unscharf -> liegt an der Engine
+ * 
  */
 
-/** Optional
+/** Allgemeine Info 
+ * 
+ * check 6 -> 6 cards Layout abändern -> https://codepen.io/mikemang/pen/GRrBRZM https://codepen.io/MEDALI1977/pen/VwaREaV
+ * check 7a -> 7a card info Layout abändern -> https://codepen.io/genarocolusso/pen/PoGzXwa
+ * check 8a -> 8a BUG: nach filter wird Gallery nicht korrekt durchgeführt
+ * check 8b -> 8b BUG: Reiter About wird immer durch die Klasse selected ausgewählt wurde, auch wenn die Gallery weiter geht
+ * 9 Stats in der navbar
+ * 10 neue Dateneinlesung mit dem https://pokeapi.co/api/v2/pokemon?offset=0&limit=50 results
+ * 11 Evo in der navbar
+ * 12 sound vom pokemon in der navbar 
+ */
+
+/** Optional Aufgaben
  * ID bei kleinen Pokemon Karte
- * Pokemon erscheint größer etc. (optional) beim Hover von kleinen Pokemon Karte
+ * Pokemon erscheint anders beim Hover von kleinen Pokemon Karte
  * Footer hinzugefügt
  */
 
@@ -31,12 +29,13 @@
  */
 const init = async () => {
   toggleClass("more-profiles", "d_none");
-  toggleClass("loading-spinner-container", "d_none");
+  toggleClass("loading-spinner-container", "d_none"); 
   await loadingPokeData();
-  createCards(dataAllPokemon);
+  createCards(dataAllPokemon);  
   toggleClass("loading-spinner-container", "d_none");
   toggleClass("more-profiles", "d_none");
   setCheckStartEnd();
+  console.log(dataAllPokemon)
 };
 
 const loadingPokeData = async () => {
@@ -83,10 +82,17 @@ const getBGType = (types, degree) => {
 };
 
 // ----------------------------------------- Sonstige ------------------------------------------------------
-/** DE
+
+
+/** DE wechseln der Klasse
  * Schaltet eine Klasse für ein HTML-Element um.
- * @param {string} id - Die ID des HTML-Elements.
- * @param {string} classname - Der Name der Klasse, die umgeschaltet werden soll.
+ * @param {string} id - ID des HTML-Elements.
+ * @param {string} classname - Name der Klasse, die umgeschaltet werden soll.
+ */
+/** ENG toggle the class
+ * Toggles a class for a HTML element.
+ * @param {string} id - ID of the HTML element.
+ * @param {string} classname - Name of the class to be switched.
  */
 const toggleClass = (id, classname) => {
   let idRef = document.getElementById(id);
@@ -104,11 +110,11 @@ const enableOverlay = (index) => {
  * @param {String} id
  */
 const closeOverlay = (id) => {
+  let bodyRef = document.getElementById("body-container");
   const overlay = document.getElementById(id);
   const parent = overlay.parentNode;
-  parent.removeChild(overlay);
 
-  let bodyRef = document.getElementById("body-container");
+  parent.removeChild(overlay);
   bodyRef.classList.remove("overflowHidden");
 };
 
@@ -118,17 +124,10 @@ const eventStop = (event) => {
 
 // ----------------------------------------- navbar ------------------------------------------------------
 
-const selectNavItem = (id) => {
-  
+const selectNavItem = (id) => {  
   toggleClass("item" + selectedIndex, "selected");
   toggleClass("item" + id, "selected");
-  selectedIndex = id;
-};
-
-const selectLoad = (id) => {
-  if(selectedIndex == id) {
-    toggleClass("item" + selectedIndex, "selected");
-  }
+  selectedIndex = id;  
 };
 
 const createScore = (index) => {
@@ -136,9 +135,16 @@ const createScore = (index) => {
   contRef.innerHTML = renderScore(index);
 };
 
-const selectInfoContent = (index) => {
-
+const createCardInfoContent = (index) =>{
+  switch (selectedIndex) {
+    case 0: return renderTest(index); break;
+    case 1: return renderScore(index); break;
+    case 2: return renderAllStats(index); break;
+    case 3: return renderTest(index); break;
+    default: return renderTest(404);
+  }
 }
+
 
 const createAbilities = (index) => {
   let abiNames = [];
@@ -150,6 +156,7 @@ const createAbilities = (index) => {
 };
 
 const nextCard = (index, direction) => {
+  console.log(selectedIndex)
   let cardInfoRef = document.getElementById("overlay");
   let futureIndex = direction == "right" ? ++index : --index;
 
@@ -161,9 +168,7 @@ const nextCard = (index, direction) => {
 
   if (futureIndex < 0) {
     futureIndex = start - 1;
-  }
-
-  console.log(searchPhrase);
+  } 
   if (searchPhrase.length >= 3) {
     if (dataAllPokemon[futureIndex].name.toLowerCase().includes(searchPhrase)) {
       cardInfoRef.innerHTML = renderCardInfo(futureIndex);

@@ -60,9 +60,9 @@
     display: flex;
     flex-direction: column;
 
-    bottom:16px;
+    bottom: 16px;
 
-    cursor: pointer;    
+    cursor: pointer;
     opacity: 50%;
     filter: drop-shadow(0px 0px 2px var(--basic_white));
 }
@@ -205,8 +205,6 @@
     color: var(--lightgrey);
     font-weight: bold;
     font-size: 1rem;
-    /* box-shadow: 0px -2px 5px 1px var(--basic_white); */
-
 }
 
 /*-- card content --*/
@@ -214,9 +212,12 @@
 #card-info-content {
     width: 100%;
     height: 30vh;
+    max-height: 30vh;
+    overflow-y: auto;
     margin: 0;
     box-sizing: border-box;
     border-radius: 0 0 5px 5px;
+    flex: 1;
 
     background: var(--basic_white);
 
@@ -229,7 +230,7 @@
 /* ------------ Info Tabelle für About -----------*/
 #card-info-content table {
     width: 80%;
-    border-collapse: collapse;    
+    border-collapse: collapse;
 }
 
 #card-info-content td {
@@ -246,4 +247,29 @@
 
 #card-info-content td:last-child {
     width: 100%;
+}
+
+/*---------- Diagramm ------------*/
+
+.bar-with-label {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.label {
+    width: 125px;
+    display: inline-block;
+    text-align: end;
+}
+
+.dia-bar {
+    width: var(--dia);
+    padding: 0.5rem;
+    background: var(--header_color);
+    text-align: center;
+    height: 1rem;
+    margin: 4px 0;
+    color: var(--basic_white);
+    border-radius: 0 10px 10px 0;
 }

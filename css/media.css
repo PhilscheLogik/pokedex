@@ -4,12 +4,33 @@
         height: 175px;
         justify-content: space-around;
     }
-    
+
 }
 
 @media(max-width: 420px) {
     .card-info-container {
         width: 315px;
     }
-    
+
+}
+
+@media(max-height: 810px) {
+    #card-info-content {        
+        font-size: 12px;
+    }
+    .dia-bar{
+        height: 10px;
+    }
+}
+
+@media(max-height: 770px) {   
+    #card-info-content {               
+        height: 25vh;
+    } 
+    #card-info-content div:first-child {               
+        margin-top: 32px;
+    } 
+    .dia-bar{
+        height: 8px;
+    }
 }
