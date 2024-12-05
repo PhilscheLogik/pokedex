@@ -8,7 +8,7 @@
 //1025 max 
 
 let maxNumber = 1025; 
-let stepNumber = 1000;
+let stepNumber = 40;
 let start = 0;
 let end = 20;
 
@@ -16,7 +16,7 @@ let dataAllPokemon = [];
 let dataPartPokemon = [];
 
 let currentIndex = 0;
-let selectedIndex = 0;
+let selectedIndex = 1;
 
 let searchPhrase = "";
 
@@ -48,7 +48,6 @@ const fetchDataPokeJson = async (index) => {
     dataAllPokemon.push(responseJson);
   } catch (error) {
     console.log(error);
-    //  document.getElementById("main-content").innerHTML = renderError(error);
     dataAllPokemon.push({ msg: error });
   }
 };

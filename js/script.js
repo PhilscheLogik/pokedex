@@ -1,26 +1,27 @@
 "use strict";
 
-/** Anmerkung
- * Neigung der kleinen Cards ist bei Google Chrome und Edge leicht unscharf -> liegt an der Engine
- * 
- */
-
-/** Allgemeine Info 
- * 
- * check 6 -> 6 cards Layout abändern -> https://codepen.io/mikemang/pen/GRrBRZM https://codepen.io/MEDALI1977/pen/VwaREaV
- * check 7a -> 7a card info Layout abändern -> https://codepen.io/genarocolusso/pen/PoGzXwa
- * check 8a -> 8a BUG: nach filter wird Gallery nicht korrekt durchgeführt
- * check 8b -> 8b BUG: Reiter About wird immer durch die Klasse selected ausgewählt wurde, auch wenn die Gallery weiter geht
- * 9 Stats in der navbar
- * 10 neue Dateneinlesung mit dem https://pokeapi.co/api/v2/pokemon?offset=0&limit=50 results
- * 11 Evo in der navbar
- * 12 sound vom pokemon in der navbar 
- */
-
-/** Optional Aufgaben
- * ID bei kleinen Pokemon Karte
- * Pokemon erscheint anders beim Hover von kleinen Pokemon Karte
+/** Optional Aufgaben erledigt
+ * ID bei kleinen Pokemon cards
+ * Hover Effekt von den kleinen Pokemon cards
  * Footer hinzugefügt
+ * Shiny Bilder werden in der nav ausgegeben
+ * Abilities, Species, Height, Weight werden in der nav ausgegeben
+ * Stats des Pokemons werden grafisch in der nav dargestellt 
+ * Schrei des einzelnen Pokemons kann mit Lautstärkeregler in der nav abgespielt werden
+ * Auswahl in der nav Leiste wird gespeichert
+ */
+
+/** Anmerkung
+ * Neigung der kleinen Cards ist bei Google Chrome und Edge leicht unscharf -> liegt an der Engine 
+ * Projekt wurde ohne Bootstrap bewerkstelligt, weil Herausforderung bezüglich der Umsetzung des Designs
+ * es wurde sich an Layouts orientiert -> https://codepen.io/mikemang/pen/GRrBRZM https://codepen.io/MEDALI1977/pen/VwaREaV
+ * 
+ * Erkenntnisse für die Weiterentwicklung:
+ * es gibt bei der navbar mit der ID #card-info-content oft die Create Funktionen, die man allgemein schreiben könnte
+ * Dateneinlesung mittels https://pokeapi.co/api/v2/pokemon?offset=0&limit=50 -> das 'results' enthält die url, die man auslesen könnte, um das max zu ermitteln
+ * Shiny Bild wechselt sich durch das hovern des Standbildes statt ein Reiter/tab in der nav bar
+ * die Weiterentwicklungslinie des Pokemons hinzufügen, falls vorhanden
+ * -> Funktion bei der Weiterentwicklung z.B. man wählt Bisasam aus, sieht den Entwicklungspfad und kann Bisaflor drücken und bekommt dann gleich die info Card angezeigt
  */
 
 // ----------------------------------------- Anfang ------------------------------------------------------
@@ -28,6 +29,7 @@
  * Initialisiert verschiedene Funktionen: ...
  */
 const init = async () => {
+  searchPhrase = "";
   toggleClass("more-profiles", "d_none");
   toggleClass("loading-spinner-container", "d_none"); 
   await loadingPokeData();
@@ -35,7 +37,6 @@ const init = async () => {
   toggleClass("loading-spinner-container", "d_none");
   toggleClass("more-profiles", "d_none");
   setCheckStartEnd();
-  console.log(dataAllPokemon)
 };
 
 const loadingPokeData = async () => {
@@ -80,9 +81,6 @@ const getBGType = (types, degree) => {
   }
   return renderLinearGradient(degree, color1, color2);
 };
-
-// ----------------------------------------- Sonstige ------------------------------------------------------
-
 
 /** DE wechseln der Klasse
  * Schaltet eine Klasse für ein HTML-Element um.
@@ -137,26 +135,23 @@ const createScore = (index) => {
 
 const createCardInfoContent = (index) =>{
   switch (selectedIndex) {
-    case 0: return renderTest(index); break;
-    case 1: return renderScore(index); break;
-    case 2: return renderAllStats(index); break;
-    case 3: return renderTest(index); break;
+    case 0: return renderShiny(index);
+    case 1: return renderScore(index);
+    case 2: return renderAllStats(index);
+    case 3: return renderSound(index);
     default: return renderTest(404);
   }
 }
-
 
 const createAbilities = (index) => {
   let abiNames = [];
   for (let i = 0; i < dataAllPokemon[index].abilities.length; i++) {
     abiNames.push(dataAllPokemon[index].abilities[i].ability.name);
   }
-
   return abiNames.join(", ");
 };
 
-const nextCard = (index, direction) => {
-  console.log(selectedIndex)
+const nextCard = (index, direction) => {  
   let cardInfoRef = document.getElementById("overlay");
   let futureIndex = direction == "right" ? ++index : --index;
 
@@ -183,9 +178,7 @@ const nextCard = (index, direction) => {
 const filterPokemon = () => {
   searchPhrase = document.getElementById("searchbar").value;
   if (searchPhrase.length > 2) {
-    dataPartPokemon = dataAllPokemon.filter((p) =>
-      p.name.includes(searchPhrase.toLowerCase())
-    );
+    dataPartPokemon = dataAllPokemon.filter((p) =>p.name.includes(searchPhrase.toLowerCase()));
     if (dataPartPokemon.length == 0) {
       let contentRef = document.getElementById("content-profiles");
       contentRef.innerHTML = renderNotFound();
