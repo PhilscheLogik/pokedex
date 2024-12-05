@@ -28,23 +28,38 @@
  */
 
 // ----------------------------------------- Code ------------------------------------------------------
-/** DE Initialisierung der Anwendung
- * Führt die Initialisierung der Anwendung durch, lädt Daten, erstellt Karten und aktualisiert die Ansicht.
- * @async
+/** DE Initialisieren
+ * Führt initiale Schritte der Anwendung aus:
+ * zeigt/verbirgt UI-Elemente, lädt Daten und verarbeitet sie.
  */
-/** ENG Application initialization
- * Handles the initialization of the application, including loading data, creating cards, and updating the view.
- * @async
+/** ENG Initialization
+ * Executes initial steps of the application:
+ * toggles UI elements, fetches and processes data.
  */
-const init = async () => {
+const init = async () => {  
+  toggleClass("more-profiles", "d_none");
+  toggleClass("loading-spinner-container", "d_none");   
+  await fetchResultPokeJson();   
+  toggleClass("loading-spinner-container", "d_none");
+  toggleClass("more-profiles", "d_none");  
+  await loading();
+};
+
+/** DE Lade Pokemon Daten
+ * zeigt/verbirgt UI-Elemente, lädt Pokémon-Daten, erstellt Karten und aktualisiert UI-Elemente.
+ */
+/** ENG Loading Pokemon data
+ * toggles UI elements, loads Pokémon data, creates cards, and updates UI elements.
+ */
+const loading = async () => {
   searchPhrase = "";
   toggleClass("more-profiles", "d_none");
-  toggleClass("loading-spinner-container", "d_none"); 
+  toggleClass("loading-spinner-container", "d_none");   
   await loadingPokeData();
   createCards(dataAllPokemon);  
   toggleClass("loading-spinner-container", "d_none");
   toggleClass("more-profiles", "d_none");
-  setCheckStartEnd();
+  setCheckStartEnd(); 
 };
 
 /** DE wechseln der Klasse
@@ -72,7 +87,7 @@ const toggleClass = (id, classname) => {
  */
 const loadingPokeData = async () => {
   for (let i = start; i < end; i++) {
-    await fetchDataPokeJson(i + 1);
+    await fetchDataPokeJson(i);
   }
 };
 
@@ -193,6 +208,7 @@ const playSound = (soundUrl, volumeID) => {
 const setVolume = (volume, audioPlayerId) => {
   const audioPlayer = document.getElementById(audioPlayerId);
   audioPlayer.volume = volume;
+  soundValue = volume;
 };
 
 // ----------------------------------------- navbar ------------------------------------------------------

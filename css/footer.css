@@ -1,9 +1,9 @@
 /* -------------------  Footer -----------------*/
 footer {
-    height: 300px;
-
     background: var(--grey);
     color: var(--basic_white);
+
+    padding: 32px 0;
 
     display: flex;
     flex-direction: column;

@@ -266,9 +266,8 @@ const renderSound = (index) => `
     <img 
       src="./asset/img/icon/play_circle.png" 
       alt="Play Sound" 
-      onclick="playSound('${String(
-        dataAllPokemon[index].cries.legacy
-      )}', 'volume-control')"
+      onclick="playSound(
+      '${String(dataAllPokemon[index].cries.latest)}', 'volume-control')"
     />
     <input 
       id="volume-control" 
@@ -276,7 +275,7 @@ const renderSound = (index) => `
       min="0" 
       max="1" 
       step="0.01" 
-      value="0.4" 
+      value="${soundValue}" 
       style="width: 150px;" 
       oninput="setVolume(this.value, 'audio-player')"
     />
