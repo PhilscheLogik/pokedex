@@ -1,11 +1,11 @@
 "use strict";
-/**
+/** DE Anmerkung
  * Hier werden globale Objekte oder Variablen zugewiesen.
+ * Quellen:
+ * https://pokeapi.co/api/v2/pokemon?offset=0&limit=50
+ * https://pokeapi.co/api/v2/pokemon/1/
+ * https://pokeapi.co/api/v2/evolution-chain/1/
  */
-// https://pokeapi.co/api/v2/pokemon?offset=0&limit=50
-// https://pokeapi.co/api/v2/pokemon/1/
-// https://pokeapi.co/api/v2/evolution-chain/1/
-//1025 max 
 
 let maxNumber = 1025; 
 let stepNumber = 40;
@@ -41,6 +41,14 @@ const typeColors = {
   normal: "beige",
 };
 
+/** DE Pokémon-Daten abrufen
+ * Lädt Pokémon-Daten von der API und speichert sie.
+ * @param {number} index - ID des Pokémon in der API.
+ */
+/** ENG Fetch Pokémon data
+ * Fetches Pokémon data from the API and stores it.
+ * @param {number} index - ID of the Pokémon in the API.
+ */
 const fetchDataPokeJson = async (index) => {
   try {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${index}/`);
