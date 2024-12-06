@@ -9,13 +9,16 @@
  */
 
 let maxNumber = 1025; 
-let stepNumber = 40;
+let stepNumber = 20;
 let start = 0;
-let end = 20;
+let end = 150;
 
 let resultsPokeData;
 let dataAllPokemon = [];
 let dataPartPokemon = [];
+let evoPokemon = [];
+
+let test;
 
 let currentIndex = 0;
 let selectedIndex = 1;
@@ -85,6 +88,16 @@ const fetchDataPokeJson = async (index) => {
     let response = await fetch(`${resultsPokeData[index].url}`);
     let responseJson = await response.json();
     dataAllPokemon.push(responseJson);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const fetchEvoPokeJson = async (index) => {
+  try {
+    let response = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${index+1}/`);
+    let responseJson = await response.json();
+    evoPokemon.push(responseJson);  
   } catch (error) {
     console.log(error);
   }

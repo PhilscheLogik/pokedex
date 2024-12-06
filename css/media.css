@@ -1,4 +1,4 @@
-@media(max-width: 480px) {
+@media(max-width: 520px) {
     header {
         flex-direction: column;
         height: 175px;
@@ -14,23 +14,23 @@
 
 }
 
+@media(max-height: 770px) {
+    .card-info-container {
+        width: 315px;
+    }
+}
+
+@media(max-height: 680px) {
+    .card-info-container {
+        width: 300px;
+    }   
+}
+
 @media(max-height: 810px) {
     #card-info-content {        
         font-size: 12px;
     }
     .dia-bar{
         height: 10px;
-    }
-}
-
-@media(max-height: 770px) {   
-    #card-info-content {               
-        height: 25vh;
-    } 
-    #card-info-content div:first-child {               
-        margin-top: 32px;
-    } 
-    .dia-bar{
-        height: 8px;
     }
 }

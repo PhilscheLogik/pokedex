@@ -25,6 +25,10 @@
  * Shiny Bild wechselt sich durch das hovern des Standbildes statt ein Reiter/tab in der nav bar
  * die Weiterentwicklungslinie des Pokemons hinzufügen, falls vorhanden
  * -> Funktion bei der Weiterentwicklung z.B. man wählt Bisasam aus, sieht den Entwicklungspfad und kann Bisaflor drücken und wird zu der InfoCard weitergeleitet
+ 
+ * Fehler: 
+ * shiny Bild in der navbar ist bei bestimmter Höhe mit scrollbar
+ * sobald man in die searchbar klick -> lade alle, die schon da sind
  */
 
 // ----------------------------------------- Code ------------------------------------------------------
@@ -38,12 +42,45 @@
  */
 const init = async () => {  
   toggleClass("more-profiles", "d_none");
-  toggleClass("loading-spinner-container", "d_none");   
-  await fetchResultPokeJson();   
+  toggleClass("loading-spinner-container", "d_none");  
+  await loadingEvoData();
+  readOutEvo();
+  await fetchResultPokeJson(); 
   toggleClass("loading-spinner-container", "d_none");
-  toggleClass("more-profiles", "d_none");  
+  toggleClass("more-profiles", "d_none"); 
+  console.log(evoPokemon);
   await loading();
 };
+
+const loadingEvoData = async () => {
+
+  for (let i = 0; i < 40; i++) {
+    await fetchEvoPokeJson(i);     
+  }  
+}
+
+const readOutEvo = () => {
+
+  // for (let j = 0; j < evoPokemon.length; j++) {
+  //   console.log(evoPokemon[j].chain.species.name);
+  // } 
+
+  let allNames = [];
+  allNames.push(readName(evoPokemon[6].chain));
+  allNames.push(readOut(evoPokemon[6].chain));
+  allNames.push(readOut(evoPokemon[6].chain.evolves_to[0]));
+
+  console.log(allNames.join(','))
+  console.log(evoPokemon[34].chain.species.name);
+  // console.log(evoPokemon[0].chain.evolves_to[0].species.name);
+  // console.log(evoPokemon[0].chain.evolves_to[0].evolves_to[0].species.name);
+
+}
+
+
+const readOut = (data) => data.evolves_to.length > 0 ? readName(data.evolves_to[0]) : 'end';
+const readName = (data) => data.species.name;
+
 
 /** DE Lade Pokemon Daten
  * zeigt/verbirgt UI-Elemente, lädt Pokémon-Daten, erstellt Karten und aktualisiert UI-Elemente.

@@ -283,9 +283,13 @@
     border-radius: 0 10px 10px 0;
 }
 
-.shiny-container,
-.shiny-container img {
+.shiny-container {
     width: 80%;
+    text-align: center;
+}
+
+.shiny-container img {
+    width: 50%;
     text-align: center;
 }
 
