@@ -48,7 +48,7 @@ const init = async () => {
   await fetchResultPokeJson(); 
   toggleClass("loading-spinner-container", "d_none");
   toggleClass("more-profiles", "d_none"); 
-  console.log(evoPokemon);
+  // console.log(evoPokemon);
   await loading();
 };
 
@@ -70,8 +70,8 @@ const readOutEvo = () => {
   allNames.push(readOut(evoPokemon[6].chain));
   allNames.push(readOut(evoPokemon[6].chain.evolves_to[0]));
 
-  console.log(allNames.join(','))
-  console.log(evoPokemon[34].chain.species.name);
+  // console.log(allNames.join(','));
+  // console.log(evoPokemon[34].chain.species.name);
   // console.log(evoPokemon[0].chain.evolves_to[0].species.name);
   // console.log(evoPokemon[0].chain.evolves_to[0].evolves_to[0].species.name);
 
