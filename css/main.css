@@ -7,7 +7,7 @@ main {
     align-items: center;
 
     padding: 16px var(--padding_calc);
-    margin-top: var(--height-header);
+    margin-top: var(--height-header, 100px);
 
     background: var(--basic_white);
 }

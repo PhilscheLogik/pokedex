@@ -11,7 +11,7 @@
 let maxNumber = 1025; 
 let stepNumber = 20;
 let start = 0;
-let end = 150;
+let end = 15;
 
 let resultsPokeData;
 let dataAllPokemon = [];

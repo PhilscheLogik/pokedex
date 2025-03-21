@@ -4,6 +4,9 @@
         height: 175px;
         justify-content: space-around;
     }
+    main {       
+        margin-top: 175px;        
+    }
 
 }
 

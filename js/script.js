@@ -77,7 +77,6 @@ const readOutEvo = () => {
 
 }
 
-
 const readOut = (data) => data.evolves_to.length > 0 ? readName(data.evolves_to[0]) : 'end';
 const readName = (data) => data.species.name;
 
